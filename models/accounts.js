@@ -14,6 +14,12 @@ const AccountSchema = new mongoose.Schema({
   mobile: {
     type: Number,
     required: [true, "Phone number is required"],
+    validate: {
+      validator: function (v) {
+        return /^[0-9]{10}$/.test(v.toString());
+      },
+      message: "Enter a valid 10-digit phone number",
+    },
   },
   password: {
     type: String,
@@ -27,6 +33,23 @@ AccountSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+//mongoose static method to login
+AccountSchema.statics.login = async function (email, password) {
+  const user = await this.findOne({ email });
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      return user;
+    }
+    throw new mongoose.Error(
+      JSON.stringify({ path: "password", msg: "Incorrect password" })
+    );
+  }
+  throw new mongoose.Error(
+    JSON.stringify({ path: "email", msg: "Incorrect email/password" })
+  );
+};
 
 const Account = mongoose.model("Account", AccountSchema);
 module.exports = Account;
