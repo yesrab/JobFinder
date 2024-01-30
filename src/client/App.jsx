@@ -1,28 +1,33 @@
 import "./App.css";
+import { useContext, lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
   Route,
   RouterProvider,
+  Await,
 } from "react-router-dom";
 import HomePage, { loader as JobCardLoader } from "./pages/home/HomePage";
 import HomePageLayout from "./pages/Layout/HomePageLayout";
-import Login, { action as LoginAction } from "./pages/account/Login";
+import { action as LoginAction } from "./pages/account/Login";
+const Login = lazy(() => import("./pages/account/Login"));
+
 import Register, { action as RegisterAction } from "./pages/account/Register";
 import AddJobDetails, {
   action as AddJobAction,
 } from "./pages/add/AddJobDetails";
-import JobDetail, { loader as jobLoader } from "./pages/details/JobDetail";
+import { loader as jobLoader } from "./pages/details/JobDetail";
+const JobDetail = lazy(() => import("./pages/details/JobDetail"));
 import LoginContext from "./context/loginContext";
-import { useContext } from "react";
+import { Watch } from "react-loader-spinner";
 import { Toaster } from "react-hot-toast";
 function App() {
   const { loginState, dispatch } = useContext(LoginContext);
 
   const Router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/">
+      <Route path='/'>
         <Route element={<HomePageLayout />}>
           <Route
             loader={({ request, params }) => {
@@ -35,21 +40,48 @@ function App() {
             loader={({ request, params }) => {
               return jobLoader({ loginState, request, params });
             }}
-            path="/:job"
-            element={<JobDetail />}
+            path='/:job'
+            element={
+              <Suspense
+                fallback={
+                  <div className='centerWatch'>
+                    <Watch
+                      visible={true}
+                      height='80'
+                      width='80'
+                      radius='48'
+                      color='#ED5353'
+                      ariaLabel='watch-loading'
+                      wrapperStyle={{}}
+                      wrapperClass=''
+                    />
+                  </div>
+                }>
+                <Await resolve={JobDetail}>
+                  <JobDetail />
+                </Await>
+              </Suspense>
+            }
           />
         </Route>
         <Route
-          path="login"
+          path='login'
           action={({ request, params }) => {
             return LoginAction({ dispatch, request, params });
           }}
-          element={<Login />}
+          element={
+            <Suspense>
+              <Await resolve={Login}>
+                <Login />
+              </Await>
+            </Suspense>
+          }
         />
-        <Route path="register" action={RegisterAction} element={<Register />} />
+
+        <Route path='register' action={RegisterAction} element={<Register />} />
 
         <Route
-          path="addjob"
+          path='addjob'
           action={({ request, params }) =>
             AddJobAction({ loginState, dispatch, request, params })
           }
@@ -57,12 +89,12 @@ function App() {
             loginState.token ? (
               <AddJobDetails />
             ) : (
-              <Navigate to="/login" replace />
+              <Navigate to='/login' replace />
             )
           }
         />
-      </Route>,
-    ),
+      </Route>
+    )
   );
 
   return (
@@ -84,3 +116,4 @@ function App() {
 }
 
 export default App;
+
