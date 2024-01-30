@@ -54,8 +54,8 @@ function FindJob({ skills }) {
             onChange={(event) => {
               setInputSearch(event.target.value);
             }}
-            type="text"
-            placeholder="Type any job title"
+            type='text'
+            placeholder='Type any job title'
           />
         </div>
       </span>
@@ -67,8 +67,7 @@ function FindJob({ skills }) {
             }}
             onBlur={() => {
               setIsOpen(false);
-            }}
-          >
+            }}>
             Skills
             <span className={`material-symbols-outlined`}>expand_more</span>
           </button>
@@ -83,8 +82,7 @@ function FindJob({ skills }) {
                       onClick={() => {
                         setIsOpen(true);
                         toggleSkill(item);
-                      }}
-                    >
+                      }}>
                       {item}
                     </li>
                   );
@@ -101,8 +99,7 @@ function FindJob({ skills }) {
                 onClick={() => {
                   toggleSkill(skill);
                 }}
-                className={`material-symbols-outlined ${jobStyles.closeBtn}`}
-              >
+                className={`material-symbols-outlined ${jobStyles.closeBtn}`}>
                 close
               </span>
             </div>
@@ -112,13 +109,13 @@ function FindJob({ skills }) {
           onClick={() => {
             setSelected([]);
             setSearchParams({});
+            setInputSearch("");
           }}
-          className={jobStyles.clearButton}
-        >
+          className={jobStyles.clearButton}>
           Clear
         </button>
         {loginState.login ? (
-          <Link to="addjob" className={jobStyles.addbtn}>
+          <Link to='addjob' className={jobStyles.addbtn}>
             + Add Job
           </Link>
         ) : null}
@@ -128,3 +125,4 @@ function FindJob({ skills }) {
 }
 
 export default FindJob;
+
