@@ -212,11 +212,5 @@ const editJob = async (req, res) => {
   return res.status(202).json(updatedJob);
 };
 
-const getJobSkills = async (req, res) => {
-  //find all the skills
-  const uniqueSkills = await jobData.distinct("skills");
-  res.status(200).json({ skills: uniqueSkills, status: "success" });
-};
-
-module.exports = { addJobs, getAllJobs, getJob, getJobSkills, editJob };
+module.exports = { addJobs, getAllJobs, getJob, editJob };
 
