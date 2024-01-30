@@ -52,6 +52,32 @@ const getAllJobs = async (req, res) => {
       $options: "i",
     };
   }
+
+  const skillsPipeline = [
+    {
+      $unwind: {
+        path: "$skills",
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        allSkills: {
+          $addToSet: "$skills",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        allSkills: 1,
+      },
+    },
+  ];
+
+  const allSkillsOutput = await jobData.aggregate(skillsPipeline);
+  const allSkills = allSkillsOutput[0]?.allSkills || [];
+  console.log(allSkills);
   const jobs = await jobData
     .find(find)
     .select(
@@ -97,7 +123,7 @@ const getAllJobs = async (req, res) => {
       return updatedJob;
     })
   );
-  res.status(200).json({ updatedJobs, nbHits: jobs.length });
+  res.status(200).json({ allSkills, updatedJobs, nbHits: jobs.length });
 };
 
 const getJob = async (req, res) => {
@@ -146,7 +172,7 @@ const editJob = async (req, res) => {
     companySize,
   } = req.body;
 
-  const loggedInUserId = res.locals.tokenData.id; // Assuming the user ID is available in the token
+  const loggedInUserId = res.locals.tokenData.id;
 
   if (!jobId) {
     return res
@@ -187,6 +213,7 @@ const editJob = async (req, res) => {
 };
 
 const getJobSkills = async (req, res) => {
+  //find all the skills
   const uniqueSkills = await jobData.distinct("skills");
   res.status(200).json({ skills: uniqueSkills, status: "success" });
 };

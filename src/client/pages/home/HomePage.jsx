@@ -28,18 +28,17 @@ export const loader = async ({ loginState, request, params }) => {
     FetchUrl.searchParams.delete("position");
   }
   const jobs = fetch(FetchUrl.toString());
-  const skills = await fetch(SkillFetchUrl.toString());
+  // const skills = await fetch(SkillFetchUrl.toString());
   // const skillsData = await skills.json();
   return defer({
     jobs: jobs.then((res) => res.json()),
-    skills: await skills.json(),
   });
 };
 function HomePage() {
   const responceData = useLoaderData();
   return (
     <div className={HomeStyles.Container}>
-      <FindJob skills={responceData.skills} />
+      <FindJob data={responceData.jobs} />
       <Suspense
         fallback={
           <Watch

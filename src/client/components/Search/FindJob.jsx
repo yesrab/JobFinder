@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import jobStyles from "./FindJob.module.css";
 import useDebounce from "../../hooks/useDebounce.js";
-import { Link, useSearchParams } from "react-router-dom";
+import { Await, Link, useSearchParams } from "react-router-dom";
 import LoginContext from "../../context/loginContext";
-function FindJob({ skills }) {
-  // console.log(skills);
+function FindJob({ data }) {
   const { loginState } = useContext(LoginContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // const skills = [
-  //   "FrontEnd",
-  //   "CSS",
-  //   "HTML",
-  //   "JavaScript",
-  //   "BackEnd",
-  //   "WordPress",
-  // ];
+  const skills = [
+    "FrontEnd",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "BackEnd",
+    "WordPress",
+  ];
+  // console.log(data);
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const [inputSearch, setInputSearch] = useState("");
@@ -74,19 +74,25 @@ function FindJob({ skills }) {
           {isOpen ? (
             <div className={jobStyles.dropDownMenu}>
               <ul className={jobStyles.list}>
-                {skills.skills.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                      onMouseDown={(e) => e.preventDefault()}
-                      onClick={() => {
-                        setIsOpen(true);
-                        toggleSkill(item);
-                      }}>
-                      {item}
-                    </li>
-                  );
-                })}
+                <Suspense fallback={<li>Loading</li>}>
+                  <Await resolve={data}>
+                    {(skills) => {
+                      return skills.allSkills.map((item, index) => {
+                        return (
+                          <li
+                            key={index}
+                            onMouseDown={(e) => e.preventDefault()}
+                            onClick={() => {
+                              setIsOpen(true);
+                              toggleSkill(item);
+                            }}>
+                            {item}
+                          </li>
+                        );
+                      });
+                    }}
+                  </Await>
+                </Suspense>
               </ul>
             </div>
           ) : null}
