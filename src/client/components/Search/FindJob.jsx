@@ -50,6 +50,7 @@ function FindJob({ data }) {
             search
           </span>
           <input
+            aria-label='Search-job-positions'
             value={inputSearch}
             onChange={(event) => {
               setInputSearch(event.target.value);
@@ -62,6 +63,7 @@ function FindJob({ data }) {
       <div className={jobStyles.dropDownContainer}>
         <div className={jobStyles.dropDown}>
           <button
+            aria-label='Skills-filter-dropdown'
             onFocus={() => {
               setIsOpen(true);
             }}
@@ -81,6 +83,7 @@ function FindJob({ data }) {
                         return (
                           <li
                             key={index}
+                            aria-label={`skills-filter-${item}`}
                             onMouseDown={(e) => e.preventDefault()}
                             onClick={() => {
                               setIsOpen(true);
@@ -102,6 +105,7 @@ function FindJob({ data }) {
             <div className={jobStyles.chipContainer} key={index}>
               <span className={jobStyles.chips}>{skill}</span>
               <span
+                aria-label={`Remove-skill-${skill}`}
                 onClick={() => {
                   toggleSkill(skill);
                 }}
@@ -112,6 +116,7 @@ function FindJob({ data }) {
           );
         })}
         <button
+          aria-label='Clear-all-filters'
           onClick={() => {
             setSelected([]);
             setSearchParams({});
@@ -121,7 +126,10 @@ function FindJob({ data }) {
           Clear
         </button>
         {loginState.login ? (
-          <Link to='addjob' className={jobStyles.addbtn}>
+          <Link
+            to='addjob'
+            aria-label='Add-new-job'
+            className={jobStyles.addbtn}>
             + Add Job
           </Link>
         ) : null}

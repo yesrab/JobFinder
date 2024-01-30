@@ -107,6 +107,7 @@ function App() {
             padding: "16px",
             color: "#713200",
             fontFamily: "DM Sans",
+            backgroundColor: "#ffefef",
           },
         }}
       />

@@ -18,7 +18,8 @@ function JobDetailCard({ data }) {
           <Link
             to={`/addjob?jobId=${data._id}`}
             state={{ data }}
-            className={DetailStyles.edit}>
+            className={DetailStyles.edit}
+            aria-label='Edit-job'>
             Edit job
           </Link>
         ) : null}

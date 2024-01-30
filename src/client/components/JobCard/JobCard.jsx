@@ -12,11 +12,11 @@ function JobCard({ data }) {
         <p className={cardStyles.possition}>{data.jobPosition}</p>
         <div className={cardStyles.infoBlock}>
           <span>
-            <span className="material-symbols-outlined">group</span>
+            <span className='material-symbols-outlined'>group</span>
             <p>{data.companySize}</p>
           </span>
           <span>
-            <span className="material-symbols-outlined">currency_rupee</span>
+            <span className='material-symbols-outlined'>currency_rupee</span>
             <p>{data.monthlySalary}</p>
           </span>
           <span>
@@ -41,7 +41,7 @@ function JobCard({ data }) {
               to={`/addjob?jobId=${data._id}`}
               state={{ data }}
               className={`${cardStyles.details} ${cardStyles.editBtn} `}
-            >
+              aria-label='Edit-Job'>
               Edit Job
             </Link>
           ) : null}
@@ -49,7 +49,7 @@ function JobCard({ data }) {
             preventScrollReset={true}
             to={data._id}
             className={cardStyles.details}
-          >
+            aria-label='View-job-details'>
             View Details
           </Link>
         </div>
@@ -59,3 +59,4 @@ function JobCard({ data }) {
 }
 
 export default JobCard;
+

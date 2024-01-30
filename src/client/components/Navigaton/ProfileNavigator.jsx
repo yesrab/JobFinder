@@ -9,6 +9,7 @@ function ProfileNavigator({ dispatch }) {
       <button
         className={`${NavigatorStyles.logOutBtn}`}
         to='login'
+        aria-label='LogOut-button'
         onClick={() => {
           toast.success("Successfully Logged out");
           dispatch({ type: "LOGOUT" });

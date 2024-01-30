@@ -113,10 +113,12 @@ function Register() {
             account, I agree to our terms of use and privacy policy
           </label>
           <br />
-          <button>Create account</button>
+          <button aria-label='Create-accout-button'>Create account</button>
         </Form>
         <p>Already have an account?</p>
-        <Link to='/login'>Sign In</Link>
+        <Link to='/login' aria-label='Go-to-login-page'>
+          Sign In
+        </Link>
       </div>
       <div className={LoginStyle.galary}>
         <h1>Your Personal Job Finder</h1>

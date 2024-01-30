@@ -99,10 +99,12 @@ export default function Login() {
             <p className={LoginStyle.errors}>{errors.password?.message}</p>
           )}
           <br />
-          <button>Sign in</button>
+          <button aria-label='Sign-in-button'>Sign in</button>
         </Form>
         <p>Don’t have an account?</p>
-        <Link to='/register'>Sign Up</Link>
+        <Link to='/register' aria-label='Go-to-signup-page'>
+          Sign Up
+        </Link>
       </div>
       <div className={LoginStyle.galary}>
         <h1>Your Personal Job Finder</h1>

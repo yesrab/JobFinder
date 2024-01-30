@@ -10,7 +10,7 @@ function NavBar() {
 
   return (
     <header className={NavBarStyle.NavHeadder}>
-      <Link to='/' className={NavBarStyle.Logo}>
+      <Link to='/' className={NavBarStyle.Logo} aria-label='Homepage'>
         Jobfinder
       </Link>
       <nav

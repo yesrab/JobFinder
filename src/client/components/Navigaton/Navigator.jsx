@@ -4,12 +4,16 @@ import NavigatorStyles from "./Navigator.module.css";
 function Navigator() {
   return (
     <>
-      <Link className={`${NavigatorStyles.anchor}`} to='login'>
+      <Link
+        className={`${NavigatorStyles.anchor}`}
+        to='login'
+        aria-label='Go-to-Login'>
         Login
       </Link>
       <Link
         className={`${NavigatorStyles.anchor} ${NavigatorStyles.reg}`}
-        to='register'>
+        to='register'
+        aria-label='Go-to-register'>
         Register
       </Link>
     </>
