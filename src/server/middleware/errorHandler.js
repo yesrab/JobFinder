@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const accountError = require("../errors/accountError");
+const jobError = require("../errors/jobError");
 const errorHandler = (err, req, res, next) => {
-  // console.log("gen", err);
+  console.log("error", err);
   if (err.code === 11000) {
     return accountError(err, req, res);
   }
@@ -9,9 +10,14 @@ const errorHandler = (err, req, res, next) => {
     if (err.message.includes("Account validation failed")) {
       return accountError(err, req, res);
     }
+    if (err.message.includes("jobData validation failed")) {
+      return jobError(err, req, res);
+    }
   }
   if (err instanceof mongoose.Error) {
-    return accountError(err, req, res);
+    if (JSON.parse(err.message).msg.includes("Incorrect")) {
+      return accountError(err, req, res);
+    }
   }
   return res.status(500).json({
     msg: "Something went wrong! Please try after some time",

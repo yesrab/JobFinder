@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const AccountSchema = new mongoose.Schema({
+  picture: {
+    type: String,
+    default:
+      "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg",
+  },
   name: {
     type: String,
     required: [true, "Name is required"],
@@ -43,7 +48,7 @@ AccountSchema.statics.login = async function (email, password) {
       return user;
     }
     throw new mongoose.Error(
-      JSON.stringify({ path: "password", msg: "Incorrect password" })
+      JSON.stringify({ path: "password", msg: "Incorrect email/password" })
     );
   }
   throw new mongoose.Error(
