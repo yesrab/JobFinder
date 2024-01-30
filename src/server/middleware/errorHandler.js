@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const accountError = require("../errors/accountError");
 const jobError = require("../errors/jobError");
 const errorHandler = (err, req, res, next) => {
-  console.log("error", err);
+  // console.log("error", err);
   if (err.code === 11000) {
     return accountError(err, req, res);
   }

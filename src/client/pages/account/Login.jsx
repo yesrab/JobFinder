@@ -44,12 +44,12 @@ export const action = async ({ dispatch, request }) => {
       type: "LOGIN",
       payload: { token: responce.token, id: responce.id },
     });
-    console.log("logged in and now navigating");
+    // console.log("logged in and now navigating");
     return redirectDocument("/", { replace: true });
   }
   if (responce?.status === "Error") {
     toast.error("Error Incorrect Credentials");
-    console.log("logged out user");
+    // console.log("logged out user");
     dispatch({ type: "LOGOUT" });
   }
   return responce;
@@ -65,7 +65,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
   function handleSubmitFunc(data) {
-    console.log("from test:", data);
+    // console.log("from test:", data);
     submit(data, { method: "post" });
   }
   return (

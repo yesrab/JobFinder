@@ -61,11 +61,11 @@ async function populateDatabase() {
   try {
     // Clear existing data
     await JobData.deleteMany({});
-    console.log("Cleared existing data.");
+    // console.log("Cleared existing data.");
 
     // Populate with new data
     const insertedData = await JobData.insertMany(jobsData);
-    console.log("Data inserted successfully:", insertedData);
+    // console.log("Data inserted successfully:", insertedData);
   } catch (error) {
     console.error("Error populating data:", error);
   } finally {
@@ -75,3 +75,4 @@ async function populateDatabase() {
 }
 
 populateDatabase();
+

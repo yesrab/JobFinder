@@ -34,14 +34,14 @@ const addJobs = async (req, res) => {
     companySize,
   });
   const token = res.locals.tokenData;
-  console.log("in addjob controller", token);
+  // console.log("in addjob controller", token);
   res.status(200).json(job);
 };
 
 const getAllJobs = async (req, res) => {
   const { reqId, skills, position } = req.query || null;
   const skillsArray = skills ? skills.split(",") : [];
-  console.log(position);
+  // console.log(position);
   const find = {};
   if (skillsArray.length > 0) {
     find.skills = { $in: skillsArray };
@@ -55,7 +55,7 @@ const getAllJobs = async (req, res) => {
   const jobs = await jobData
     .find(find)
     .select(
-      "_id companyName logoUrl jobPosition monthlySalary jobType jobLocation jobCity skills companySize createdBy",
+      "_id companyName logoUrl jobPosition monthlySalary jobType jobLocation jobCity skills companySize createdBy"
     );
 
   const updatedJobs = await Promise.all(
@@ -64,7 +64,7 @@ const getAllJobs = async (req, res) => {
 
       // Get geolocation data
       const geolocationurl = `https://api.opencagedata.com/geocode/v1/json?key=${apikey}&q=${encodeURIComponent(
-        job.jobCity,
+        job.jobCity
       )}`;
       const geolocationResponse = await fetch(geolocationurl);
       const geolocationData = await geolocationResponse.json();
@@ -95,7 +95,7 @@ const getAllJobs = async (req, res) => {
       delete updatedJob.createdBy;
 
       return updatedJob;
-    }),
+    })
   );
   res.status(200).json({ updatedJobs, nbHits: jobs.length });
 };
@@ -111,7 +111,7 @@ const getJob = async (req, res) => {
   // console.log("created by", job.createdBy.toString());
   // console.log("reqid", reqId);
   const geolocationurl = `https://api.opencagedata.com/geocode/v1/json?key=${apikey}&q=${encodeURIComponent(
-    job.jobCity,
+    job.jobCity
   )}`;
   const geolocationResponse = await fetch(geolocationurl);
   const geolocationData = await geolocationResponse.json();
@@ -127,10 +127,10 @@ const getJob = async (req, res) => {
 };
 
 const editJob = async (req, res) => {
-  console.log("entered update jobs");
+  // console.log("entered update jobs");
   const { jobId } = res.locals.reqJob;
-  console.log(res.locals);
-  console.log(jobId);
+  // console.log(res.locals);
+  // console.log(jobId);
   const {
     companyName,
     logoUrl,
@@ -181,7 +181,7 @@ const editJob = async (req, res) => {
 
   // Save the updated job
   const updatedJob = await existingJob.save();
-  console.log("updated job", updatedJob);
+  // console.log("updated job", updatedJob);
   // Return the updated job in the response
   return res.status(202).json(updatedJob);
 };
@@ -192,3 +192,4 @@ const getJobSkills = async (req, res) => {
 };
 
 module.exports = { addJobs, getAllJobs, getJob, getJobSkills, editJob };
+

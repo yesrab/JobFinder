@@ -13,7 +13,7 @@ const createToken = (obj) => {
 
 const registerAccount = async (req, res) => {
   const { name, email, mobile, password } = req.body;
-  console.log("this is register acc body", req.body);
+  // console.log("this is register acc body", req.body);
   const data = await Account.create({ name, email, mobile, password });
   res.json({ data, status: "success" });
 };
@@ -25,7 +25,7 @@ const login = async (req, res) => {
   const id = _id.toString();
   const token = createToken({ id, name, mobile, email: resEmail });
   res.cookie("token", token, { httpOnly: true, maxAge: maxAge * 1000 });
-  console.log("login information sent", token);
+  // console.log("login information sent", token);
   res
     .status(202)
     .json({ id, mobile, name, email: resEmail, token, status: "success" });

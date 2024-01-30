@@ -27,7 +27,7 @@ export const action = async ({ params, request }) => {
     formObj[val[0]] = val[1];
   }
   formObj.mobile = +formObj.mobile;
-  console.log(formObj);
+  // console.log(formObj);
   const newRequest = new Request(action, {
     method: "POST",
     body: JSON.stringify(formObj),
@@ -54,7 +54,7 @@ function Register() {
     resolver: yupResolver(schema),
   });
   function handleSubmitFunc(data) {
-    console.log("from test:", data);
+    // console.log("from test:", data);
     submit(data, { method: "post" });
   }
   return (

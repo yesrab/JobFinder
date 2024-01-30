@@ -5,11 +5,11 @@ const requireAuth = (req, res, next) => {
   const jobId = req.query || null;
   const token = authHeader ? authHeader.split(" ")[1] : null;
   // console.log("auth middleware", token);
-  console.log("auth middleware from params", jobId);
+  // console.log("auth middleware from params", jobId);
   if (token) {
     jwt.verify(token, secrete, (err, decoadedToken) => {
       if (err) {
-        console.log(err.message);
+        // console.log(err.message);
         return res.status(401).json({ msg: err.message, status: "Error" });
       } else {
         // console.log("auth middleware decode", decoadedToken);

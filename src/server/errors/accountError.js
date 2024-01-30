@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const account = (err, req, res, next) => {
-  console.log("inside Account Error handler");
+  // console.log("inside Account Error handler");
 
   const error = {
     name: "",
@@ -23,7 +23,7 @@ const account = (err, req, res, next) => {
     if (JSON.parse(err.message).msg.includes("Incorrect")) {
       const errobj = JSON.parse(err.message);
       error[errobj.path] = errobj.msg;
-      console.log(error);
+      // console.log(error);
       return res.status(401).json(error);
     }
   }

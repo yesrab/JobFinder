@@ -35,7 +35,7 @@ const schema = yup.object().shape({
     .required("Enter the ideal skills, comma-separated")
     .matches(
       /^[a-zA-Z]+(?:,[a-zA-Z]+)*$/,
-      "Invalid format. Use letters and commas only.",
+      "Invalid format. Use letters and commas only."
     ),
   information: yup
     .string()
@@ -46,7 +46,7 @@ const schema = yup.object().shape({
 export const action = async ({ loginState, dispatch, request }) => {
   const action = "http://localhost:3000/api/v1/job/addjobs";
   const FormData = await request.formData();
-  console.log(FormData);
+  // console.log(FormData);
   const formObj = {};
   for (const val of FormData.entries()) {
     formObj[val[0]] = val[1];
@@ -55,24 +55,24 @@ export const action = async ({ loginState, dispatch, request }) => {
   formObj.createdBy = id;
   formObj.skills = formObj.skills.split(",");
 
-  console.log(formObj);
+  // console.log(formObj);
   // console.log(token);
 
-  console.log("intent is", request.method);
+  // console.log("intent is", request.method);
   if (request.method === "POST") {
     const newRequest = new Request(action, {
       method: "POST",
       body: JSON.stringify(formObj),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
 
     const data = await fetch(newRequest);
     // console.log(data);
     if (data.status === 401) {
-      console.log("unauthorised logging out");
+      // console.log("unauthorised logging out");
       dispatch({ type: "LOGOUT" });
       return redirectDocument("/login");
     }
@@ -103,20 +103,20 @@ export const action = async ({ loginState, dispatch, request }) => {
     const url = new URL(request.url);
     const id = url.searchParams.get("jobId");
     const puturl = `/api/v1/job/addjobs?jobId=${id}`;
-    console.log(puturl);
+    // console.log(puturl);
     const newRequest = new Request(puturl, {
       method: "PUT",
       body: JSON.stringify(formObj),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
 
     const data = await fetch(newRequest);
     // console.log(data);
     if (data.status === 401) {
-      console.log("unauthorised logging out");
+      // console.log("unauthorised logging out");
       dispatch({ type: "LOGOUT" });
       return redirectDocument("/login");
     }
@@ -206,16 +206,15 @@ function AddJobDetails() {
         <Form
           onSubmit={handleSubmit(handleSubmitFunc)}
           method={method}
-          className={addJobStyles.LoginForm}
-        >
+          className={addJobStyles.LoginForm}>
           <span>
-            <label htmlFor="companyName">Company Name</label>
+            <label htmlFor='companyName'>Company Name</label>
             <input
-              name="companyName"
+              name='companyName'
               defaultValue={jobData?.companyName}
-              id="companyName"
-              placeholder="Enter your company name here"
-              type="text"
+              id='companyName'
+              placeholder='Enter your company name here'
+              type='text'
               {...register("companyName")}
             />
           </span>
@@ -223,16 +222,16 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.companyName?.message}</p>
           )}
           <span>
-            <label htmlFor="logoUrl">Add logo URL</label>
+            <label htmlFor='logoUrl'>Add logo URL</label>
             <input
               defaultValue={
                 jobData?.logoUrl ||
                 "https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
               }
-              type="url"
-              name="logoUrl"
-              id="logoUrl"
-              placeholder="Enter the link"
+              type='url'
+              name='logoUrl'
+              id='logoUrl'
+              placeholder='Enter the link'
               {...register("logoUrl")}
             />
           </span>
@@ -240,11 +239,11 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.logoUrl?.message}</p>
           )}
           <span>
-            <label htmlFor="jobPosition">Job position</label>
+            <label htmlFor='jobPosition'>Job position</label>
             <input
-              name="jobPosition"
-              id="jobPosition"
-              placeholder="Enter job position"
+              name='jobPosition'
+              id='jobPosition'
+              placeholder='Enter job position'
               defaultValue={jobData?.jobPosition}
               {...register("jobPosition")}
             />
@@ -253,12 +252,12 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.jobPosition?.message}</p>
           )}
           <span>
-            <label htmlFor="monthlySalary">Monthly salary</label>
+            <label htmlFor='monthlySalary'>Monthly salary</label>
             <input
-              name="monthlySalary"
-              id="monthlySalary"
-              type="number"
-              placeholder="Enter Amount in rupees"
+              name='monthlySalary'
+              id='monthlySalary'
+              type='number'
+              placeholder='Enter Amount in rupees'
               defaultValue={jobData?.monthlySalary}
               {...register("monthlySalary")}
             />
@@ -272,17 +271,16 @@ function AddJobDetails() {
             <legend>Job Type</legend>
             <select
               className={addJobStyles.selection}
-              name="jobType"
-              id="jobType"
+              name='jobType'
+              id='jobType'
               defaultValue={jobData?.jobType || ""}
-              {...register("jobType")}
-            >
-              <option value="" disabled>
+              {...register("jobType")}>
+              <option value='' disabled>
                 Select
               </option>
-              <option value="Full time">Full time</option>
-              <option value="Part time">Part time</option>
-              <option value="Internship">Internship</option>
+              <option value='Full time'>Full time</option>
+              <option value='Part time'>Part time</option>
+              <option value='Internship'>Internship</option>
             </select>
           </span>
           {errors.jobType && (
@@ -292,27 +290,26 @@ function AddJobDetails() {
             <legend>Remote/office</legend>
             <select
               className={addJobStyles.selection}
-              name="jobLocation"
-              id="jobLocation"
+              name='jobLocation'
+              id='jobLocation'
               defaultValue={jobData?.jobLocation || ""}
-              {...register("jobLocation")}
-            >
-              <option value="" disabled>
+              {...register("jobLocation")}>
+              <option value='' disabled>
                 Select
               </option>
-              <option value="Remote">Remote</option>
-              <option value="Office">Office</option>
+              <option value='Remote'>Remote</option>
+              <option value='Office'>Office</option>
             </select>
           </span>
           {errors.jobLocation && (
             <p className={addJobStyles.errors}>{errors.jobLocation?.message}</p>
           )}
           <span>
-            <label htmlFor="jobCity">Location</label>
+            <label htmlFor='jobCity'>Location</label>
             <input
-              name="jobCity"
-              id="jobCity"
-              placeholder="Enter Location"
+              name='jobCity'
+              id='jobCity'
+              placeholder='Enter Location'
               defaultValue={jobData?.jobCity}
               {...register("jobCity")}
             />
@@ -321,11 +318,11 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.jobCity?.message}</p>
           )}
           <span>
-            <label htmlFor="jobDescription">Job Description</label>
+            <label htmlFor='jobDescription'>Job Description</label>
             <textarea
-              name="jobDescription"
-              id="jobDescription"
-              placeholder="Type the job description"
+              name='jobDescription'
+              id='jobDescription'
+              placeholder='Type the job description'
               defaultValue={jobData?.jobDescription}
               {...register("jobDescription")}
             />
@@ -336,11 +333,11 @@ function AddJobDetails() {
             </p>
           )}
           <span>
-            <label htmlFor="aboutCompany">About Company</label>
+            <label htmlFor='aboutCompany'>About Company</label>
             <textarea
-              name="aboutCompany"
-              id="aboutCompany"
-              placeholder="Type about your company"
+              name='aboutCompany'
+              id='aboutCompany'
+              placeholder='Type about your company'
               defaultValue={jobData?.aboutCompany}
               {...register("aboutCompany")}
             />
@@ -351,11 +348,11 @@ function AddJobDetails() {
             </p>
           )}
           <span>
-            <label htmlFor="skills">Skills Required</label>
+            <label htmlFor='skills'>Skills Required</label>
             <input
-              name="skills"
-              id="skills"
-              placeholder="Enter the must have skills"
+              name='skills'
+              id='skills'
+              placeholder='Enter the must have skills'
               defaultValue={jobData?.skills.join(",")}
               {...register("skills")}
             />
@@ -364,11 +361,11 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.skills?.message}</p>
           )}
           <span>
-            <label htmlFor="information">Information</label>
+            <label htmlFor='information'>Information</label>
             <input
-              name="information"
-              id="information"
-              placeholder="Enter the additional information"
+              name='information'
+              id='information'
+              placeholder='Enter the additional information'
               defaultValue={jobData?.information}
               {...register("information")}
             />
@@ -377,11 +374,11 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.information?.message}</p>
           )}
           <span>
-            <label htmlFor="companySize">companySize</label>
+            <label htmlFor='companySize'>companySize</label>
             <input
-              name="companySize"
-              id="companySize"
-              placeholder="Enter Company size"
+              name='companySize'
+              id='companySize'
+              placeholder='Enter Company size'
               defaultValue={jobData?.companySize}
               {...register("companySize")}
             />
@@ -390,10 +387,10 @@ function AddJobDetails() {
             <p className={addJobStyles.errors}>{errors.companySize?.message}</p>
           )}
           <span className={addJobStyles.boundary}>
-            <Link to=".." className={addJobStyles.cancel}>
+            <Link to='..' className={addJobStyles.cancel}>
               Cancel
             </Link>
-            <button type="submit" name="intent" value="add">
+            <button type='submit' name='intent' value='add'>
               {jobData?.mutable ? "Edit" : "+ Add Job"}
             </button>
           </span>
@@ -407,3 +404,4 @@ function AddJobDetails() {
 }
 
 export default AddJobDetails;
+
