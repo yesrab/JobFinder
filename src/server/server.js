@@ -3,7 +3,7 @@ require("dotenv").config();
 require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(cors());
