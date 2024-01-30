@@ -17,6 +17,11 @@
   gap: 11px;
 }
 
+.header > img {
+  width: 5%;
+  aspect-ratio: 1/1;
+}
+
 .possition {
   display: flex;
   justify-content: space-between;
@@ -99,14 +104,14 @@
   border-radius: 30px;
 }
 
-@media only screen and (max-width: 767px){
-  .container{
+@media only screen and (max-width: 767px) {
+  .container {
     width: 80%;
   }
-  .edit{
+  .edit {
     height: 90%;
   }
-  .possition{
+  .possition {
     margin-top: 1dvh;
   }
   .possition > h1 {

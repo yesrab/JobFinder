@@ -18,8 +18,7 @@ function JobDetailCard({ data }) {
           <Link
             to={`/addjob?jobId=${data._id}`}
             state={{ data }}
-            className={DetailStyles.edit}
-          >
+            className={DetailStyles.edit}>
             Edit job
           </Link>
         ) : null}
@@ -30,10 +29,10 @@ function JobDetailCard({ data }) {
         </p>
         <div className={DetailStyles.jobGrid}>
           <div className={DetailStyles.money}>
-            <span className="material-symbols-outlined">payments</span> Stipend
+            <span className='material-symbols-outlined'>payments</span> Stipend
           </div>
           <div className={DetailStyles.time}>
-            <span className="material-symbols-outlined">calendar_today</span>
+            <span className='material-symbols-outlined'>calendar_today</span>
             Duration
           </div>
           <div className={DetailStyles.moneyAmmount}>
@@ -67,3 +66,4 @@ function JobDetailCard({ data }) {
 }
 
 export default JobDetailCard;
+

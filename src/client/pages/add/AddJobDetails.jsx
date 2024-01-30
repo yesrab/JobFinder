@@ -44,7 +44,6 @@ const schema = yup.object().shape({
 });
 
 export const action = async ({ loginState, dispatch, request }) => {
-  const action = "http://localhost:3000/api/v1/job/addjobs";
   const FormData = await request.formData();
   // console.log(FormData);
   const formObj = {};
@@ -60,6 +59,7 @@ export const action = async ({ loginState, dispatch, request }) => {
 
   // console.log("intent is", request.method);
   if (request.method === "POST") {
+    const action = "http://localhost:3000/api/v1/job/addjobs";
     const newRequest = new Request(action, {
       method: "POST",
       body: JSON.stringify(formObj),
@@ -70,7 +70,7 @@ export const action = async ({ loginState, dispatch, request }) => {
     });
 
     const data = await fetch(newRequest);
-    // console.log(data);
+    console.log(data);
     if (data.status === 401) {
       // console.log("unauthorised logging out");
       dispatch({ type: "LOGOUT" });
