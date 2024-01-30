@@ -1,5 +1,6 @@
 const jobData = require("../models/jobs");
 const axios = require("axios");
+const cache = require("memory-cache");
 const fetch = require("node-fetch");
 const apikey = process.env.GEOAPI || null;
 const addJobs = async (req, res) => {
@@ -42,6 +43,13 @@ const getAllJobs = async (req, res) => {
   const { reqId, skills, position } = req.query || null;
   const skillsArray = skills ? skills.split(",") : [];
   // console.log(position);
+
+  const data = cache.get("data");
+  if (data) {
+    console.log("Serving from cache alljobs");
+    return res.status(304).json(data);
+  }
+
   const find = {};
   if (skillsArray.length > 0) {
     find.skills = { $in: skillsArray };
@@ -77,7 +85,7 @@ const getAllJobs = async (req, res) => {
 
   const allSkillsOutput = await jobData.aggregate(skillsPipeline);
   const allSkills = allSkillsOutput[0]?.allSkills || [];
-  console.log(allSkills);
+
   const jobs = await jobData
     .find(find)
     .select(
@@ -123,17 +131,25 @@ const getAllJobs = async (req, res) => {
       return updatedJob;
     })
   );
+
+  cache.put("data", { allSkills, updatedJobs, nbHits: jobs.length }, 1000 * 2);
   res.status(200).json({ allSkills, updatedJobs, nbHits: jobs.length });
 };
 
 const getJob = async (req, res) => {
   const { reqId } = req.query || null;
   const jobId = req.params.jobId;
+  const data = cache.get("data");
+  if (data) {
+    console.log("Serving from cache");
+    return res.status(304).json(data);
+  }
   const job = await jobData.findById(jobId);
 
   if (!job) {
     return res.status(404).json({ msg: "Job not found", status: "Error" });
   }
+
   // console.log("created by", job.createdBy.toString());
   // console.log("reqid", reqId);
   const geolocationurl = `https://api.opencagedata.com/geocode/v1/json?key=${apikey}&q=${encodeURIComponent(
@@ -149,6 +165,8 @@ const getJob = async (req, res) => {
   } else {
     updatedJob.mutable = false;
   }
+
+  cache.put("data", updatedJob, 1000 * 2);
   res.status(200).json(updatedJob);
 };
 
