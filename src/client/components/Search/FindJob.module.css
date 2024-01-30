@@ -1,0 +1,163 @@
+.container {
+  box-shadow: 0px 0px 22px 4px #ff202040;
+  width: 80%;
+  padding: 3%;
+  margin-top: 2em;
+}
+.head {
+  display: flex;
+  width: 100%;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 23px;
+}
+
+.head > div {
+  display: flex;
+  border: 2px solid #e3e3e3;
+  border-radius: 9px;
+  align-items: center;
+  width: 100%;
+}
+/* div > span {
+  color: #9c9c9c;
+  margin-left: 10px;
+} */
+
+div > input {
+  outline: none;
+  border: none;
+  margin: 1em;
+  flex-grow: 1;
+  font-family: "DM Sans", sans-serif;
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.dropDownContainer {
+  margin-top: 4%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dropDown {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  padding-right: 0;
+  padding-left: 1%;
+}
+
+.icon {
+  color: #9c9c9c;
+  margin-left: 5px;
+}
+
+.dropDown > button {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  color: #9c9c9c;
+  background-color: white;
+  border: 2px solid #cecece;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 10% 10%;
+  cursor: pointer;
+}
+
+.dropDown > button:hover {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: 500;
+}
+
+.dropDownMenu {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+  top: 100%;
+  background-color: #ffefef;
+  width: 8em;
+  border-radius: 8px;
+  padding: 0 2%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 20px 0;
+}
+.list {
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+  padding: 0 10px;
+}
+.list > li {
+  padding: 5px 5px;
+  text-align: center;
+  border-radius: 4px;
+  color: #9c9c9c;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.list > li:hover {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.chipContainer {
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  padding: 0.5%;
+  font-family: "DM Sans", sans-serif;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  color: black;
+  font-weight: 500;
+  background-color: #ffeeee;
+  font-size: 19px;
+  padding: 0.1em;
+}
+
+.closeBtn {
+  padding: 0.3em;
+  margin: 0;
+  background-color: #ff6b6b;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.clearButton {
+  border: none;
+  background-color: inherit;
+  color: #ff6b6b;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.addbtn {
+  align-items: center;
+  color: white;
+  background-color: #ed5353;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 1%;
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 412px){
+  .container{
+    width: 90%;
+  }
+}

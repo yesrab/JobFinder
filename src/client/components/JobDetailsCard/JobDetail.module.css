@@ -1,0 +1,115 @@
+.container {
+  background-color: white;
+  box-shadow: 0px 2px 35px 1px #0000001a;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  font-family: "DM Sans", sans-serif;
+  padding: 1em;
+}
+
+.header {
+  display: flex;
+  font-weight: 500;
+  /* margin-top: 1em; */
+  align-items: center;
+  color: #999999;
+  gap: 11px;
+}
+
+.possition {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  color: white;
+  border: none;
+  background-color: #ed5353;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.edit:hover {
+  transform: scale(1.1);
+}
+
+.JobInfo > p {
+  color: #ed5353;
+  font-weight: 500;
+}
+
+.jobGrid {
+  margin-top: 1em;
+  display: grid;
+  min-width: 20%;
+  max-width: 35%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 1%;
+  grid-row-gap: 10px;
+  color: #999999;
+}
+
+.money {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.time {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.moneyAmmount {
+  grid-area: 2 / 1 / 3 / 2;
+  /* text-align: center; */
+  color: #595959;
+}
+.durationVal {
+  grid-area: 2 / 2 / 3 / 3;
+  text-align: center;
+  color: #595959;
+}
+.TextContainer {
+  margin-top: 1em;
+}
+.TextContainer h3 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 10px;
+}
+
+.chipsContainer {
+  display: flex;
+  gap: 10px;
+}
+.skillChip {
+  background-color: #ffeeee;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+@media only screen and (max-width: 767px){
+  .container{
+    width: 80%;
+  }
+  .edit{
+    height: 90%;
+  }
+  .possition{
+    margin-top: 1dvh;
+  }
+  .possition > h1 {
+    max-width: 70%;
+  }
+}

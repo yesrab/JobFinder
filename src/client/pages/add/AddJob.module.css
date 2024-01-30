@@ -1,0 +1,174 @@
+.Container {
+  display: flex;
+  flex-grow: 1;
+  font-family: "DM Sans", sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.headdings {
+  padding: 0 0 2% 0;
+}
+
+.LoginForm {
+  overflow-y: auto;
+  height: 87vh;
+}
+
+.LoginForm > span {
+  display: flex;
+  align-items: center;
+  width: 90%;
+}
+
+.LoginForm > span > input {
+  margin: 0 0 1% 0;
+  padding: 1%;
+  width: 60%;
+  border: 2px solid #c2c2c2;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+.LoginForm > span > textarea {
+  margin: 0 0 1% 0;
+  padding: 1%;
+  width: 60%;
+  min-height: 4em;
+  border: 2px solid #c2c2c2;
+  border-radius: 2px;
+  font-size: 20px;
+  font-family: "DM Sans", sans-serif;
+  resize: none;
+}
+
+.LoginForm > span > label {
+  font-size: 23px;
+  margin-right: auto;
+}
+
+.tags {
+  font-size: 23px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headdings > h1 {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+}
+.headdings > p {
+  color: #525252;
+  font-weight: 500;
+}
+
+.galary {
+  flex-grow: 1;
+  height: 100vh;
+  background-image: url("../../assets/addJob.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
+}
+.formContaier > p {
+  display: inline;
+}
+
+.cancel {
+  margin-left: auto;
+  margin-right: 5px;
+  padding: 1% 5% 1% 5%;
+  font-size: 16px;
+  background-color: white;
+  border: 2px solid #cecece;
+  color: #c2c2c2;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.LoginForm > span > button {
+  padding: 1% 5% 1% 5%;
+  font-size: 16px;
+  background-color: #ed5353;
+  border: 2px solid #ed5353;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.formContaierRegister {
+  width: 50%;
+  padding: 1% 0 0 3%;
+}
+.formContaierRegister > p {
+  display: inline;
+}
+
+.selection {
+  color: #adadad;
+  width: 20%;
+  border: 2px solid #c2c2c2;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  font-size: 16px;
+  text-align: center;
+  margin-right: 40%;
+}
+
+.selection > option {
+  text-align: center;
+  border-radius: 8px;
+  color: black;
+}
+
+.boundary {
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+.errors {
+  color: red;
+  text-align: center;
+}
+
+@media (min-width: 1920px) {
+  .LoginForm > span > textarea {
+    height: 8em;
+  }
+  .LoginForm > span > input {
+    margin-bottom: 3%;
+  }
+}
+
+@media only screen and (max-width: 767px){
+
+  .Container{
+    min-height: 100dvh;
+  }
+  .headdings{
+    text-align: center;
+  }
+  .galary{
+    display: none;
+  }
+  .formContaierRegister{
+    width: 100%;
+    padding: 0;
+    margin: 10px;
+  }
+  .LoginForm{
+    height: 90dvh;
+  }
+.boundary{
+  justify-content: center;
+}
+  .cancel{
+    margin-left: 0;
+  }
+}

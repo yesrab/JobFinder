@@ -1,0 +1,28 @@
+.anchor {
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  height: 40%;
+  padding: 2%;
+  border-radius: 5px;
+}
+.reg {
+  background-color: white;
+  color: #ed5353;
+}
+
+.logOutBtn {
+  background-color: inherit;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pfp {
+  width: 13%;
+  margin: 5%;
+}
