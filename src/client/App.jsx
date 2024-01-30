@@ -12,7 +12,7 @@ import HomePage, { loader as JobCardLoader } from "./pages/home/HomePage";
 import HomePageLayout from "./pages/Layout/HomePageLayout";
 import { action as LoginAction } from "./pages/account/Login";
 const Login = lazy(() => import("./pages/account/Login"));
-
+import Error from "./pages/error/Error";
 import Register, { action as RegisterAction } from "./pages/account/Register";
 import AddJobDetails, {
   action as AddJobAction,
@@ -27,7 +27,7 @@ function App() {
 
   const Router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/'>
+      <Route path='/' errorElement={<Error />}>
         <Route element={<HomePageLayout />}>
           <Route
             loader={({ request, params }) => {

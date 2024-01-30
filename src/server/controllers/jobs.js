@@ -37,6 +37,7 @@ const addJobs = async (req, res) => {
   const token = res.locals.tokenData;
   // console.log("in addjob controller", token);
   res.status(200).json(job);
+  cache.del("data");
 };
 
 const getAllJobs = async (req, res) => {
@@ -46,7 +47,7 @@ const getAllJobs = async (req, res) => {
 
   const data = cache.get("data");
   if (data) {
-    console.log("Serving from cache alljobs");
+    // console.log("Serving from cache alljobs");
     return res.status(304).json(data);
   }
 
@@ -141,7 +142,7 @@ const getJob = async (req, res) => {
   const jobId = req.params.jobId;
   const data = cache.get("data");
   if (data) {
-    console.log("Serving from cache");
+    // console.log("Serving from cache");
     return res.status(304).json(data);
   }
   const job = await jobData.findById(jobId);

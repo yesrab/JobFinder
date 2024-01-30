@@ -24,6 +24,9 @@ export const loader = async ({ loginState, params }) => {
   }
 
   const job = await fetch(FetchUrl.toString());
+  if (!job.ok) {
+    return redirect("/", { replace: true });
+  }
   const jobData = job.json();
   return defer({ data: jobData });
   // return null;
