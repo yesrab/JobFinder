@@ -9,7 +9,6 @@ export const loader = async ({ loginState, request, params }) => {
   const { id } = loginState;
   const skill = url.searchParams.get("skill");
   const position = url.searchParams.get("position");
-  console.log("Homepage loader fired", position);
 
   const FetchUrl = new URL("/api/v1/job/getjobs", window.location.origin);
   const SkillFetchUrl = new URL("/api/v1/job/skills", window.location.origin);
@@ -45,16 +44,15 @@ function HomePage() {
         fallback={
           <Watch
             visible={true}
-            height="80"
-            width="80"
-            radius="48"
-            color="#ED5353"
-            ariaLabel="watch-loading"
+            height='80'
+            width='80'
+            radius='48'
+            color='#ED5353'
+            ariaLabel='watch-loading'
             wrapperStyle={{}}
-            wrapperClass=""
+            wrapperClass=''
           />
-        }
-      >
+        }>
         <Await resolve={responceData.jobs}>
           {(responce) => {
             return responce?.updatedJobs.map((item, key) => {
@@ -68,3 +66,4 @@ function HomePage() {
 }
 
 export default HomePage;
+
