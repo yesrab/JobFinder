@@ -100,6 +100,7 @@ function Register() {
           <br />
           <input
             name='password'
+            type='password'
             placeholder='Password'
             {...register("password")}
           />

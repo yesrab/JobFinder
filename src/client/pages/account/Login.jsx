@@ -55,7 +55,7 @@ export const action = async ({ dispatch, request }) => {
   return responce;
 };
 
-function Login() {
+export default function Login() {
   let submit = useSubmit();
   const {
     register,
@@ -91,6 +91,7 @@ function Login() {
           <br />
           <input
             name='password'
+            type='password'
             placeholder='Password'
             {...register("password")}
           />
@@ -109,5 +110,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
