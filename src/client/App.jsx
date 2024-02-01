@@ -17,8 +17,8 @@ import Register, { action as RegisterAction } from "./pages/account/Register";
 import AddJobDetails, {
   action as AddJobAction,
 } from "./pages/add/AddJobDetails";
-import { loader as jobLoader } from "./pages/details/JobDetail";
-const JobDetail = lazy(() => import("./pages/details/JobDetail"));
+import JobDetail, { loader as jobLoader } from "./pages/details/JobDetail";
+
 import LoginContext from "./context/loginContext";
 import { Watch } from "react-loader-spinner";
 import { Toaster } from "react-hot-toast";
@@ -41,27 +41,7 @@ function App() {
               return jobLoader({ loginState, request, params });
             }}
             path='/:job'
-            element={
-              <Suspense
-                fallback={
-                  <div className='centerWatch'>
-                    <Watch
-                      visible={true}
-                      height='80'
-                      width='80'
-                      radius='48'
-                      color='#ED5353'
-                      ariaLabel='watch-loading'
-                      wrapperStyle={{}}
-                      wrapperClass=''
-                    />
-                  </div>
-                }>
-                <Await resolve={JobDetail}>
-                  <JobDetail />
-                </Await>
-              </Suspense>
-            }
+            element={<JobDetail />}
           />
         </Route>
         <Route
