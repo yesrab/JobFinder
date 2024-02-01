@@ -1,6 +1,5 @@
 const jobData = require("../models/jobs");
 const axios = require("axios");
-const cache = require("memory-cache");
 const fetch = require("node-fetch");
 const apikey = process.env.GEOAPI || null;
 const addJobs = async (req, res) => {

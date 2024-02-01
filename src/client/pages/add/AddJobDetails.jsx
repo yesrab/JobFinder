@@ -59,7 +59,7 @@ export const action = async ({ loginState, dispatch, request }) => {
 
   // console.log("intent is", request.method);
   if (request.method === "POST") {
-    const action = "http://localhost:3000/api/v1/job/addjobs";
+    const action = "/api/v1/job/addjobs";
     const newRequest = new Request(action, {
       method: "POST",
       body: JSON.stringify(formObj),
