@@ -4,9 +4,15 @@ require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
-
+const allowedOrigins = process.env.ORIGIN;
 const app = express();
-app.use(cors());
+
+var corsOptions = {
+  origin: allowedOrigins,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 //import db connections
 const connectDB = require("./db/connect");
