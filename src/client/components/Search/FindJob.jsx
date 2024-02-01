@@ -7,19 +7,20 @@ function FindJob({ data }) {
   const { loginState } = useContext(LoginContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const skills = [
-    "FrontEnd",
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "BackEnd",
-    "WordPress",
-  ];
+  // const skills = [
+  //   "FrontEnd",
+  //   "CSS",
+  //   "HTML",
+  //   "JavaScript",
+  //   "BackEnd",
+  //   "WordPress",
+  // ];
   // console.log(data);
+
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const [inputSearch, setInputSearch] = useState("");
-  const debouncedInputSearch = useDebounce(inputSearch, 500);
+  const debouncedInputSearch = useDebounce(inputSearch, 300);
   const toggleSkill = (skill) => {
     if (selected.includes(skill)) {
       setSelected((prev) => prev.filter((item) => item !== skill));

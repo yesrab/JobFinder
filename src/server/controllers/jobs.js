@@ -37,19 +37,11 @@ const addJobs = async (req, res) => {
   const token = res.locals.tokenData;
   // console.log("in addjob controller", token);
   res.status(200).json(job);
-  cache.del("data");
 };
 
 const getAllJobs = async (req, res) => {
   const { reqId, skills, position } = req.query || null;
   const skillsArray = skills ? skills.split(",") : [];
-  // console.log(position);
-
-  const data = cache.get("data");
-  if (data) {
-    // console.log("Serving from cache alljobs");
-    return res.status(304).json(data);
-  }
 
   const find = {};
   if (skillsArray.length > 0) {
@@ -61,7 +53,6 @@ const getAllJobs = async (req, res) => {
       $options: "i",
     };
   }
-
   const skillsPipeline = [
     {
       $unwind: {
@@ -83,20 +74,16 @@ const getAllJobs = async (req, res) => {
       },
     },
   ];
-
   const allSkillsOutput = await jobData.aggregate(skillsPipeline);
   const allSkills = allSkillsOutput[0]?.allSkills || [];
-
   const jobs = await jobData
     .find(find)
     .select(
       "_id companyName logoUrl jobPosition monthlySalary jobType jobLocation jobCity skills companySize createdBy"
     );
-
   const updatedJobs = await Promise.all(
     jobs.map(async (job) => {
       const mutable = reqId === job.createdBy.toString();
-
       // Get geolocation data
       const geolocationurl = `https://api.opencagedata.com/geocode/v1/json?key=${apikey}&q=${encodeURIComponent(
         job.jobCity
@@ -106,12 +93,10 @@ const getAllJobs = async (req, res) => {
       const country_code =
         geolocationData.results[0]?.components?.country_code || "";
       const country = geolocationData.results[0]?.components?.country || "";
-
       // Get flag URL
       let flagurl = `https://flagsapi.com/${
         country_code.toUpperCase() || "IN"
       }/flat/32.png`;
-
       if (res.statusCode === 402) {
         // Use Indian flag as default for status 402
         flagurl = "https://flagsapi.com/IN/flat/32.png";
@@ -120,7 +105,6 @@ const getAllJobs = async (req, res) => {
           country_code.toUpperCase() || "IN"
         }/flat/32.png`;
       }
-
       const updatedJob = {
         ...job.toObject(),
         mutable,
@@ -133,18 +117,13 @@ const getAllJobs = async (req, res) => {
     })
   );
 
-  cache.put("data", { allSkills, updatedJobs, nbHits: jobs.length }, 1000 * 2);
   res.status(200).json({ allSkills, updatedJobs, nbHits: jobs.length });
 };
 
 const getJob = async (req, res) => {
   const { reqId } = req.query || null;
   const jobId = req.params.jobId;
-  const data = cache.get("data");
-  if (data) {
-    // console.log("Serving from cache");
-    return res.status(304).json(data);
-  }
+
   const job = await jobData.findById(jobId);
 
   if (!job) {
@@ -167,7 +146,6 @@ const getJob = async (req, res) => {
     updatedJob.mutable = false;
   }
 
-  cache.put("data", updatedJob, 1000 * 2);
   res.status(200).json(updatedJob);
 };
 

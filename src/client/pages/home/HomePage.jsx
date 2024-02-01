@@ -4,14 +4,13 @@ import FindJob from "../../components/Search/FindJob";
 import JobCard from "../../components/JobCard/JobCard";
 import { useLoaderData, defer, Await } from "react-router-dom";
 import { Watch } from "react-loader-spinner";
-export const loader = async ({ loginState, request, params }) => {
+export const loader = ({ loginState, request, params }) => {
   const url = new URL(request.url);
   const { id } = loginState;
   const skill = url.searchParams.get("skill");
   const position = url.searchParams.get("position");
 
   const FetchUrl = new URL("/api/v1/job/getjobs", window.location.origin);
-  const SkillFetchUrl = new URL("/api/v1/job/skills", window.location.origin);
   if (id) {
     FetchUrl.searchParams.set("reqId", id);
   } else {
